@@ -3,9 +3,19 @@ import './App.css';
 import Header from "./MyComponents/Header";
 import Todos from "./MyComponents/Todos";
 import Footer from "./MyComponents/Footer";
-import TodoItem from './MyComponents/TodoItem'
+import TodoItem from './MyComponents/TodoItem';
+import AddTodo from "./MyComponents/AddTodo";
+import { useState } from 'react';
 function App() {
-  let todos=[
+
+  const onDelete =(todo) =>{
+    console.log("On Delete",todo);
+    setTodos(todos.filter((e)=>{
+      return e!==todo;
+    }));
+  }
+
+  const [todos,setTodos]=useState([
     {
       sno:1,
       title:"book",
@@ -32,12 +42,13 @@ function App() {
       desc:"Business",
     },
 
-  ]   
+  ]);   
 
   return (
     <>
       <Header title="Todos"/>
-      <Todos todos={todos}/>
+      <AddTodo/>
+      <Todos todos={todos} onDelete={onDelete}/>
       <Footer/>
     </>
   );
